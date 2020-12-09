@@ -30,25 +30,35 @@ public class Planet {
   }
 
   public double calcDistance(Planet p) {
-    return Math.sqrt(Math.pow(this.xxPos - p.xxPos, 2)
-                    + Math.pow(this.xxPos - p.yyPos, 2));
+    double diffX = xxPos - p.xxPos;
+    double diffY = yyPos - p.yyPos;
+    double dist = Math.sqrt(diffX * diffX + diffY * diffY);
+    return dist;
   }
 
   public double calcForceExertedBy(Planet p) {
-    return (6.67E-11 * this.mass * p.mass) / Math.pow(this.calcDistance(p), 2);
+    double r = calcDistance(p);
+    double F =  6.67e-11 * mass * p.mass / (r * r);
+    return F;
   }
 
   public double calcForceExertedByX(Planet p){
-    return this.calcForceExertedBy(p) * (p.xxPos - this.xxPos)
-          / this.calcDistance(p);
+    double F = calcForceExertedBy(p);
+    double r  = calcDistance(p);
+    double diffX = p.xxPos - xxPos;
+    double fX = F * diffX / r;
+    return fX;
   }
 
   public double calcForceExertedByY(Planet p){
-    return this.calcForceExertedBy(p) * (p.yyPos - this.yyPos)
-          / this.calcDistance(p);
+    double F = calcForceExertedBy(p);
+    double r  = calcDistance(p);
+    double diffY = p.yyPos - yyPos;
+    double fY = F * diffY / r;
+    return fY;
   }
 
-  public Boolean equals(Planet p) {
+  private Boolean equals(Planet p) {
     if (xxPos == p.xxPos && yyPos == p.yyPos && xxVel == p.xxVel &&
         yyVel == p.yyVel && mass == p.mass && imgFileName == p.imgFileName) {
               return true;
