@@ -48,6 +48,14 @@ public class Planet {
           / this.calcDistance(p);
   }
 
+  public Boolean equals(Planet p) {
+    if (xxPos == p.xxPos && yyPos == p.yyPos && xxVel == p.xxVel &&
+        yyVel == p.yyVel && mass == p.mass && imgFileName == p.imgFileName) {
+              return true;
+    }
+    return false;
+  }
+
   public double calcNetForceExertedByX(Planet[] ps) {
     double output = 0.0;
     for (Planet p : ps) {
