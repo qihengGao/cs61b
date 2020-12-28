@@ -13,14 +13,6 @@ public class ArrayDeque<T> {
         nextLast = (nextFirst + 1 + size) % items.length;
     }
 
-    public ArrayDeque(T item) {
-        items = (T[]) new Object[8];
-        size = 1;
-        nextFirst = (items.length - 1) / 2;
-        items[nextFirst--] = item;
-        nextLast = (nextFirst + 1 + size) % items.length;
-    }
-
     public boolean isEmpty() {
         return size == 0;
     }
@@ -70,8 +62,8 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        size--;
         T item = get(0);
+        size--;
         nextFirst = (nextFirst + 1) > (items.length - 1) ? 0 : nextFirst + 1;
         items[nextFirst] = null;
         if (size < items.length / 4) {
@@ -84,8 +76,8 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         }
-        size--;
         T item = get(size() - 1);
+        size--;
         nextLast = (nextLast - 1) < 0 ? items.length - 1 : nextLast - 1;
         items[nextLast] = null;
         if (size < items.length / 4) {
